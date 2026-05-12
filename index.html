@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anu Shree — Biomedical Engineering & AI</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-50: #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-400: #378ADD;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --blue-900: #042C53;
+    --teal-50: #E1F5EE;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --gray-50: #F8F9FA;
+    --gray-100: #F1F3F5;
+    --gray-200: #E9ECEF;
+    --gray-300: #DEE2E6;
+    --gray-500: #ADB5BD;
+    --gray-600: #6C757D;
+    --gray-700: #495057;
+    --gray-900: #212529;
+    --ink: #0D1B2A;
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: #fff;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--ink); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 14px; color: var(--gray-600); transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding: 6rem 2rem 5rem;
+    max-width: 860px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-50); color: var(--blue-800);
+    font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 6px 14px; border-radius: 99px;
+    border: 1px solid var(--blue-100);
+  }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-400); display: block; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--blue-600); }
+  .hero-tagline { font-size: 18px; color: var(--gray-600); max-width: 540px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; border-radius: 8px;
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    transition: all .2s;
+  }
+  .btn-primary { background: var(--blue-600); color: #fff; border: 1.5px solid var(--blue-600); }
+  .btn-primary:hover { background: var(--blue-800); border-color: var(--blue-800); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--gray-300); }
+  .btn-outline:hover { background: var(--gray-100); border-color: var(--gray-500); }
+  .hero-stats {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    padding-top: 1rem; border-top: 1px solid var(--gray-200); width: 100%;
+  }
+  .hero-stat { display: flex; flex-direction: column; }
+  .hero-stat .num { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--ink); }
+  .hero-stat .lbl { font-size: 13px; color: var(--gray-600); }
+
+  /* SECTION WRAPPER */
+  section { padding: 5rem 2rem; border-top: 1px solid var(--gray-200); }
+  .section-inner { max-width: 860px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue-600); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 4vw, 36px); color: var(--ink); margin-bottom: 2rem; line-height: 1.2;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { color: var(--gray-700); margin-bottom: 1rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 12px; }
+  .highlight-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px 16px;
+  }
+  .hl-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: var(--blue-50); color: var(--blue-600);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .hl-text { font-size: 14px; color: var(--gray-700); line-height: 1.5; }
+  .hl-text strong { color: var(--ink); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .skills-group h3 {
+    font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--gray-600); margin-bottom: 12px;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-pill {
+    font-size: 13px; padding: 5px 12px; border-radius: 99px;
+    border: 1px solid var(--gray-300); color: var(--gray-700); background: #fff;
+    transition: all .15s;
+  }
+  .skill-pill:hover { border-color: var(--blue-400); color: var(--blue-800); background: var(--blue-50); }
+  .skill-pill.lang { border-color: var(--blue-100); background: var(--blue-50); color: var(--blue-800); }
+
+  /* EXPERIENCE / TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item { display: flex; gap: 1.5rem; padding-bottom: 2.5rem; position: relative; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 44px; }
+  .timeline-dot {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--blue-400); border: 2px solid var(--blue-100); flex-shrink: 0; margin-top: 4px;
+  }
+  .timeline-line { flex: 1; width: 1px; background: var(--gray-200); margin-top: 4px; }
+  .timeline-item:last-child .timeline-line { display: none; }
+  .timeline-content { flex: 1; }
+  .timeline-content h3 { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 2px; }
+  .timeline-content .role { font-size: 14px; color: var(--blue-600); font-weight: 500; }
+  .timeline-content .period {
+    display: inline-block; font-size: 12px; color: var(--gray-600);
+    background: var(--gray-100); padding: 2px 10px; border-radius: 99px; margin-top: 6px; margin-bottom: 8px;
+  }
+  .timeline-content p { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .project-card {
+    background: #fff; border: 1px solid var(--gray-200); border-radius: 12px;
+    padding: 1.25rem; transition: border-color .2s, transform .2s;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .project-card:hover { border-color: var(--blue-400); transform: translateY(-2px); }
+  .project-tag {
+    display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 99px;
+    background: var(--teal-50); color: var(--teal-600);
+  }
+  .project-card h3 { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .project-card p { font-size: 13px; color: var(--gray-600); line-height: 1.5; flex: 1; }
+
+  /* RESEARCH */
+  .research-card {
+    background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: 12px;
+    padding: 1.5rem 2rem; display: flex; gap: 1.5rem; align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .research-badge {
+    background: var(--blue-600); color: #fff; font-size: 12px; font-weight: 500;
+    padding: 6px 12px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; line-height: 1.4; text-align: center;
+  }
+  .research-card h3 { font-size: 16px; font-weight: 500; color: var(--blue-800); margin-bottom: 6px; line-height: 1.4; }
+  .research-card p { font-size: 14px; color: var(--blue-600); }
+
+  /* ACHIEVEMENTS */
+  .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .ach-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 12px 14px;
+  }
+  .ach-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; color: var(--blue-600); }
+  .ach-text { font-size: 14px; color: var(--gray-700); line-height: 1.5; }
+
+  /* LEADERSHIP */
+  .leadership-list { display: flex; flex-direction: column; gap: 12px; }
+  .lead-item {
+    display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px;
+    border: 1px solid var(--gray-200); border-radius: 10px; background: #fff;
+  }
+  .lead-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--teal-50); color: var(--teal-600);
+    display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .lead-text h4 { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .lead-text p { font-size: 13px; color: var(--gray-600); }
+
+  /* HOBBIES */
+  .hobbies-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hobby-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 99px;
+    padding: 8px 16px; font-size: 14px; color: var(--gray-700);
+  }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .contact-card {
+    display: flex; flex-direction: column; gap: 8px; padding: 1.25rem 1.5rem;
+    border: 1px solid var(--gray-200); border-radius: 12px; background: #fff;
+    transition: border-color .2s; cursor: pointer;
+  }
+  .contact-card:hover { border-color: var(--blue-400); background: var(--blue-50); }
+  .contact-card .cc-icon { font-size: 22px; color: var(--blue-600); }
+  .contact-card h4 { font-size: 13px; color: var(--gray-500); font-weight: 400; }
+  .contact-card p { font-size: 14px; font-weight: 500; color: var(--ink); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-200); padding: 2.5rem 2rem; text-align: center;
+  }
+  footer .footer-inner { max-width: 860px; margin: 0 auto; }
+  .footer-quote {
+    font-family: 'DM Serif Display', serif; font-style: italic;
+    font-size: 18px; color: var(--gray-600); margin-bottom: 1rem;
+  }
+  footer p { font-size: 13px; color: var(--gray-500); }
+
+  @media (max-width: 640px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Anu Shree</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#research">Research</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-eyebrow">Biomedical Engineering · AI · Healthcare Technology</span>
+  <h1>Innovating healthcare<br>through <em>technology & AI</em></h1>
+  <p class="hero-tagline">Final-year Biomedical Engineering student passionate about solving real-world healthcare problems with machine learning, explainable AI, and embedded systems.</p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View projects &rarr;</a>
+    <a href="#contact" class="btn btn-outline">Contact me</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">8</span><span class="lbl">Projects</span></div>
+    <div class="hero-stat"><span class="num">3</span><span class="lbl">Internships</span></div>
+    <div class="hero-stat"><span class="num">1</span><span class="lbl">Publications</span></div>
+    <div class="hero-stat"><span class="num">8.78</span><span class="lbl">SGPA</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">About me</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2 class="section-title">Hardworking, curious, and driven</h2>
+        <p>I'm a Biomedical Engineering student with a deep interest in applying AI and software development to healthcare challenges. Whether it's building explainable models for cancer prediction or designing signal processing systems, I'm always looking for where technology and medicine intersect.</p>
+        <p>I thrive on continuous learning — from exploring new ML frameworks to contributing at international conferences. I bring strong teamwork, leadership, and communication skills to every project I take on.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <span class="hl-icon">&#128200;</span>
+          <div class="hl-text"><strong>AI & Healthcare</strong>Applying machine learning and explainable AI to real clinical problems.</div>
+        </div>
+        <div class="highlight-item">
+          <span class="hl-icon">&#128187;</span>
+          <div class="hl-text"><strong>Full-stack development</strong>From embedded systems and PCB design to web applications.</div>
+        </div>
+        <div class="highlight-item">
+          <span class="hl-icon">&#127941;</span>
+          <div class="hl-text"><strong>Awards & recognition</strong>Class 2nd rank, hackathon finalist, district-level football player.</div>
+        </div>
+        <div class="highlight-item">
+          <span class="hl-icon">&#128101;</span>
+          <div class="hl-text"><strong>Leadership</strong>Event manager, NSS volunteer, Rotaract Club member.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">What I work with</h2>
+    <div class="skills-grid">
+      <div class="skills-group">
+        <h3>Programming languages</h3>
+        <div class="skill-pills">
+          <span class="skill-pill lang">C</span>
+          <span class="skill-pill lang">Python</span>
+          <span class="skill-pill lang">Java</span>
+          <span class="skill-pill lang">HTML</span>
+          <span class="skill-pill lang">CSS</span>
+          <span class="skill-pill lang">JavaScript</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <h3>Technical skills</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">Machine Learning</span>
+          <span class="skill-pill">Explainable AI</span>
+          <span class="skill-pill">Image Processing</span>
+          <span class="skill-pill">Web Development</span>
+          <span class="skill-pill">Healthcare Analytics</span>
+          <span class="skill-pill">Embedded Systems</span>
+          <span class="skill-pill">PCB Design</span>
+          <span class="skill-pill">Biomedical Signal Processing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Internship timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-left"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <div class="role">Product Development Intern</div>
+          <h3>Phoenix Medical Systems, Chennai</h3>
+          <span class="period">Jan 2026 — ongoing</span>
+          <p>Working on product development and innovation in medical technology, applying biomedical engineering principles to real clinical-grade devices.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <div class="role">Web Development Intern</div>
+          <h3>CodeBind Technologies</h3>
+          <span class="period">1 month</span>
+          <p>Built and maintained web applications, gaining hands-on experience with front-end technologies and modern development workflows.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left"><div class="timeline-dot"></div><div class="timeline-line"></div></div>
+        <div class="timeline-content">
+          <div class="role">Java Developer Intern</div>
+          <h3>Uniq Technologies</h3>
+          <span class="period">1 month</span>
+          <p>Developed Java-based applications, strengthening object-oriented programming skills and software engineering foundations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Selected work</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-tag">Cardiology</span>
+        <h3>Cardiac Risk Stratification Dashboard</h3>
+        <p>Interactive dashboard for stratifying cardiac risk using patient data and predictive analytics.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Explainable AI</span>
+        <h3>Breast Cancer Prediction using SVM & XAI</h3>
+        <p>SVM-based classifier with explainability overlays to support clinical interpretability. Published at ICERECT-2025.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Computer Vision</span>
+        <h3>Attendance Monitoring via Face Recognition</h3>
+        <p>Automated attendance system using real-time facial detection and recognition algorithms.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Neuroimaging</span>
+        <h3>Metabolic Activity of Brain (Awake vs Asleep)</h3>
+        <p>Image processing pipeline to analyse and compare brain metabolic activity across sleep states.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Mental Health</span>
+        <h3>Digital Mental Health Support System</h3>
+        <p>Psychological support platform designed specifically for students, combining digital tools with evidence-based approaches.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Embedded</span>
+        <h3>Pedometer with Fall Detection</h3>
+        <p>Wearable embedded system that tracks steps and detects falls using accelerometer data.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">Medical Imaging</span>
+        <h3>Cervical Spine Segmentation for Fracture Detection</h3>
+        <p>Automated segmentation model to identify cervical spine fractures from medical imaging data.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag">RF Engineering</span>
+        <h3>Flexible Antenna for Drowsiness Monitoring</h3>
+        <p>Wearable flexible antenna design for non-invasive drowsiness detection — under IEEE journal review.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-inner">
+    <p class="section-label">Research & publications</p>
+    <h2 class="section-title">Academic contributions</h2>
+    <div class="research-card">
+      <div class="research-badge">IEEE &amp;<br>Scopus</div>
+      <div>
+        <h3>Enhancing Breast Cancer Prediction using SVM and Explainable AI</h3>
+        <p>Presented at ICERECT-2025 International Conference. Indexed in IEEE and Scopus.</p>
+      </div>
+    </div>
+    <div class="research-card">
+      <div class="research-badge">IEEE<br>Journal</div>
+      <div>
+        <h3>Flexible Antenna for Drowsiness Monitoring</h3>
+        <p>IEEE journal paper currently in progress — focuses on wearable RF antenna design for non-invasive driver monitoring.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <p class="section-label">Achievements</p>
+    <h2 class="section-title">Recognition & milestones</h2>
+    <div class="achievements-grid">
+      <div class="ach-item"><span class="ach-icon">&#127942;</span><span class="ach-text">Selected for HackWithInfy Second Round</span></div>
+      <div class="ach-item"><span class="ach-icon">&#127942;</span><span class="ach-text">Smart India Hackathon — Internal Round Qualified</span></div>
+      <div class="ach-item"><span class="ach-icon">&#127942;</span><span class="ach-text">Top 3 Team — Phoenix Medical Systems Hackathon</span></div>
+      <div class="ach-item"><span class="ach-icon">&#127891;</span><span class="ach-text">Class Second Rank Holder — 8.78 SGPA</span></div>
+      <div class="ach-item"><span class="ach-icon">&#127891;</span><span class="ach-text">School Top Rank Holder</span></div>
+      <div class="ach-item"><span class="ach-icon">&#9917;</span><span class="ach-text">District Level Football Player</span></div>
+      <div class="ach-item"><span class="ach-icon">&#127881;</span><span class="ach-text">Winner — Quiz, Essay Writing, Drawing & Craft Competitions</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="section-inner">
+    <p class="section-label">Leadership & activities</p>
+    <h2 class="section-title">Community involvement</h2>
+    <div class="leadership-list">
+      <div class="lead-item">
+        <span class="lead-icon">&#127775;</span>
+        <div class="lead-text">
+          <h4>Event Manager — Student Association of Biomedical Engineering</h4>
+          <p>Organised Teachers' Day and Farewell events for the department.</p>
+        </div>
+      </div>
+      <div class="lead-item">
+        <span class="lead-icon">&#129309;</span>
+        <div class="lead-text">
+          <h4>NSS Volunteer</h4>
+          <p>Active contributor to National Service Scheme community activities.</p>
+        </div>
+      </div>
+      <div class="lead-item">
+        <span class="lead-icon">&#127758;</span>
+        <div class="lead-text">
+          <h4>Rotaract Club Member</h4>
+          <p>Participating in service projects, leadership development, and international fellowship.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="section-inner">
+    <p class="section-label">Hobbies & interests</p>
+    <h2 class="section-title">Beyond the lab</h2>
+    <div class="hobbies-wrap">
+      <span class="hobby-pill">&#128218; Reading books</span>
+      <span class="hobby-pill">&#10067; Quizzing</span>
+      <span class="hobby-pill">&#9917; Football</span>
+      <span class="hobby-pill">&#129504; Exploring AI & healthcare</span>
+      <span class="hobby-pill">&#127912; Drawing & creative activities</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <div class="contact-grid">
+      <a href="mailto:anushreejayarm9@gmail.com" class="contact-card">
+        <span class="cc-icon">&#9993;</span>
+        <h4>Email</h4>
+        <p>anushree@example.com</p>
+      </a>
+      <a href="www.linkedin.com/in/anushreejayaram" target="_blank" class="contact-card">
+        <span class="cc-icon">&#128101;</span>
+        <h4>LinkedIn</h4>
+        <p>linkedin.com/in/anushree</p>
+      </a>
+      <a href="tel:+918870710511" class="contact-card">
+        <span class="cc-icon">&#128222;</span>
+        <h4>Phone</h4>
+        <p>+91 00000 00000</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-quote">"Technology and innovation can transform healthcare and improve lives."</p>
+    <p>Anu Shree &mdash; Biomedical Engineering Student &bull; 2025</p>
+  </div>
+</footer>
+
+</body>
+</html>
